@@ -3,4 +3,12 @@
 <p><%= @restaurant.phone_number %></p>
 <p><%= @restaurant.category %></p>
 
-<%= link_to "Index", "/restaurants" %>
+<% @reviews.each do |review| %>
+  <h2><%= review.content %></h2>
+  <p><%= review.rating %></p>
+<% end %>
+
+
+<%= link_to "Index", restaurants_path %>
+
+<%= link_to "Add review", new_restaurant_review_path(@restaurant) %>

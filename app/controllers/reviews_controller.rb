@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   def index
-    @reviews = Restaurant.all
+    @reviews = Review.all
   end
 
   def show
@@ -9,20 +9,31 @@ class ReviewsController < ApplicationController
   end
 
   def new
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @review = Review.new
   end
 
   def create
-    @review = Review.create(review_params)
-    # redirect
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @review = Review.new(review_params)
+    @review.restaurant = Restaurant.find(params[:restaurant_id])
+    if @review.save
+      redirect_to restaurant_path(@restaurant)
+    # we need `restaurant_id` to asssociate review with corresponding restaurant
+    else
+      render :new
+    end
   end
 
   def edit
   end
 
   def update
-    @review.update(review_params)
-    # redirect
+    if @review.update(review_params)
+      redirect_to review_path(@review)
+    else
+      render :edit
+    end
   end
 
   def destroy

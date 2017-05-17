@@ -1,2 +1,5 @@
-<h1>Review#show</h1>
-<p>Find me in app/views/review/show.html.erb</p>
+<h2><%= @review.content %></h2>
+<p><%= @review.rating %></p>           <%# rajouter raw avant la variable pour ne pas afficher les balises%>
+
+
+<%= link_to "Index", "/reviews" %>

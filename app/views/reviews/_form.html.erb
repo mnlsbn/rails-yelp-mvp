@@ -1,0 +1,18 @@
+<%= simple_form_for(@review) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class='container'>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+
+  <%= f.submit %>
+</div>
+<% end %>
